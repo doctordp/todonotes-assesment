@@ -13,7 +13,7 @@ import { TodosService } from '@app/todos/services/todos.service';
 })
 export class CompleteAllComponent implements OnInit, OnDestroy {
 
-  multipleTodosExist = false;
+  multipleTodosExist = true;
   subscription: Subscription;
 
   constructor (

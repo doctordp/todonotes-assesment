@@ -1,9 +1,20 @@
 <ul class="todo-list">
-  <li>
-    <div class="view">
-      <input class="toggle" type="checkbox" />
-      <label></label>
-      <button class="destroy"></button>
+  <li *ngFor="let todo of allTodos" #myTodos>
+    <div class="view" *ngIf="!marktoEdit(todo.id)" (dblclick)="toEdit(todo.id, todo.text)">
+      <input class="toggle" [ngClass]="complete(todo.id) ? 'active' : 'none'" type="checkbox" (click)="checkTodo(todo.id)" />
+      <label [ngClass]="complete(todo.id) ? 'todoText' : 'none'">{{ todo.text }}</label>
+      <button class="destroy" (click)="destroyTodo(todo.id)"></button>
+    </div>
+    <div class="editing" *ngIf="marktoEdit(todo.id)">
+      <form [formGroup]="editTodoForm" (ngSubmit)="onSubmit(todo.id)">
+        <input
+        id="editInput" 
+        formControlName="todoText"
+        class="me-editing"
+        value="{{todo.text}}"
+        autofocus
+        >
+      </form>
     </div>
   </li>
 </ul>

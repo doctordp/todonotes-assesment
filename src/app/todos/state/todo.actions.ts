@@ -8,22 +8,22 @@ export const addTodo = createAction(
 
 export const removeTodo = createAction(
   '[Todos] Remove Todo',
-  props<{ index: number }>(),
+  props<{ id: number }>(),
 );
 
 export const editTodo = createAction(
   '[Todos] Edit Todo',
-  props<{ index: number }>(),
+  props<{ id: number }>(),
 );
 
 export const updateTodo = createAction(
   '[Todos] Update Todo',
-  props<{ index: number, text: string }>(),
+  props<{ id: number, text: string }>(),
 );
 
 export const toggleCompleted = createAction(
   '[Todos] Toggle Completed',
-  props<{ index: number }>(),
+  props<{ id: number }>(),
 );
 
 export const toggleAllCompleted = createAction(

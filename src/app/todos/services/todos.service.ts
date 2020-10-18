@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { ITodo } from '../interfaces';
@@ -12,31 +12,33 @@ import * as todoSelectors from '../state/todo.selectors';
 export class TodosService {
 
   allTodos$: Observable<ITodo[]>;
+  filter: Observable<ITodosState>;
 
   constructor(
     private store: Store<ITodosState>,
   ) {
-    this.allTodos$ = this.store.select(todoSelectors.allTodos);
+    this.allTodos$ = this.store.select(todoSelectors.allTodos)
+    this.filter =  this.store.select(todoSelectors.todosSelector);
   }
 
   addTodo(text: string): void {
     this.store.dispatch(TodoActions.addTodo({ text }));
   }
 
-  removeTodo(index: number): void {
-    this.store.dispatch(TodoActions.removeTodo({ index }));
+  removeTodo(id: number): void {
+    this.store.dispatch(TodoActions.removeTodo({ id }));
   }
 
-  toggleComplete(index: number): void {
-    this.store.dispatch(TodoActions.toggleCompleted({ index }));
+  toggleComplete(id: number): void {
+    this.store.dispatch(TodoActions.toggleCompleted({ id }));
   }
 
   toggleAllCompleted(): void {
     this.store.dispatch(TodoActions.toggleAllCompleted());
   }
 
-  updateTodo(index: number, text: string): void {
-    this.store.dispatch(TodoActions.updateTodo({ index, text }));
+  updateTodo(id: number, text: string): void {
+    this.store.dispatch(TodoActions.updateTodo({ id, text }));
   }
 
   changeFilterMode(mode: FILTER_MODES): void {
@@ -45,5 +47,9 @@ export class TodosService {
 
   clearCompleted(): void {
     this.store.dispatch(TodoActions.clearCompleted());
+  }
+
+  editTodo(id: number): void {
+    this.store.dispatch(TodoActions.editTodo({id}));
   }
 }

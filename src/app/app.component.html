@@ -1,8 +1,13 @@
 <main class="todoapp">
   <header class="header">
     <h1>todos</h1>
-    <form enctype="application/x-www-form-urlencoded" role="form" novalidate>
-      <input class="new-todo" placeholder="What needs to be done" autofocus>
+    <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+      <input 
+      formControlName="todoText"
+      class="new-todo"
+      placeholder="What needs to be done"
+      autofocus
+      >
     </form>
   </header>
   <section class="main">
@@ -13,16 +18,16 @@
     <span class="todo-count"></span>
     <ul class="filters">
       <li>
-        <a href="#" class="selected">All</a>
+        <a (click)="showByFilter('All')" class="selected">All</a>
       </li>
       <li>
-        <a href="#">Active</a>
+        <a (click)="showByFilter('Active')" >Active</a>
       </li>
       <li>
-        <a href="#" >Completed</a>
+        <a (click)="showByFilter('Completed')">Completed</a>
       </li>
     </ul>
-    <button class="clear-completed">Clear completed</button>
+    <button (click)="clearCompleted()" class="clear-completed">Clear completed</button>
   </footer>
 </main>
 <footer class="info">

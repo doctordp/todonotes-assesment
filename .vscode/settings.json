@@ -1,0 +1,17 @@
+// Workspace settings
+{
+  // The following will hide the js and map files in the editor
+  "files.exclude": {
+    "**/*.map": true,
+    "node_modules": true,
+    "**/*.spec.ts": true,
+    "**/*.gitignore": true,
+    "dist": true,
+    "e2e": true,
+    "browserslist": true,
+    "karma*": true,
+    "**.md": true,
+    "ts**": true,
+    ".editor**": true
+  }
+}
